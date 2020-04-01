@@ -1,7 +1,6 @@
 package com.vladis1350.services;
 
 import com.vladis1350.bean.Product;
-import com.vladis1350.enumCategory.Category;
 import com.vladis1350.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +31,7 @@ public class ProductService {
         repository.deleteById(id);
     }
 
-    public List<Product> findAllByCategory(Category category) {
+    public List<Product> findAllByCategory(String category) {
         Iterable<Product> products = repository.findAll();
         List<Product> resultFilter = new ArrayList<>();
         for (Product product: products) {
@@ -43,7 +42,7 @@ public class ProductService {
         return resultFilter;
     }
 
-    public void setDiscountForCategory(Category category, BigDecimal discount) {
+    public void setDiscountForCategory(String category, BigDecimal discount) {
         Iterable<Product> products = repository.findAll();
         List<Product> resultList = new ArrayList<>();
 

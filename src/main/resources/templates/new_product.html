@@ -23,7 +23,7 @@
                     <td>
                         <select th:field="*{category}">
                             <option th:each="category : ${T(com.vladis1350.enumCategory.Category).values()}"
-                                    th:value="${category}"
+                                    th:value="${category.roleCode}"
                                     th:text="${category.roleCode}">
                              </option>
                         </select>

@@ -36,7 +36,7 @@
                 <form action="#" th:action="@{/filter}" th:object="${product}" method="post">
                     <select name="category">
                         <option th:each="category : ${T(com.vladis1350.enumCategory.Category).values()}"
-                                th:value="${category}"
+                                th:value="${category.roleCode}"
                                 th:text="${category.roleCode}">
                         </option>
                     </select>

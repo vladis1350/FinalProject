@@ -17,21 +17,21 @@ public class Product {
     private Long id;
     private String name;
     private BigDecimal price;
-    private Category category;
+    private String category;
     private BigDecimal discount;
     private String description;
 
     public Product() {
     }
 
-    public Product(String name, BigDecimal price, Category category, BigDecimal discount) {
+    public Product(String name, BigDecimal price, String category, BigDecimal discount) {
         this.name = name;
         this.price = price;
         this.category = category;
         this.discount = discount;
     }
 
-    public Product(Long id, String name, BigDecimal price, Category category, BigDecimal discount) {
+    public Product(Long id, String name, BigDecimal price, String category, BigDecimal discount) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -63,11 +63,11 @@ public class Product {
         this.price = price;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

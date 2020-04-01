@@ -53,7 +53,7 @@ class FinalProjectJavaOneApplicationTests {
 
 	@Test
 	void testShouldReturnProductById() throws Exception {
-		Product productActual = new Product(21l, "Nokia", new BigDecimal("630.00"), Category.VEGETABLES, new BigDecimal("10.00"));
+		Product productActual = new Product(21l, "Nokia", new BigDecimal("630.00"), "Vegetables", new BigDecimal("10.00"));
 		Product expectedProduct = service.getById(21l);
 		Assert.assertEquals(expectedProduct, productActual);
 	}
@@ -61,7 +61,7 @@ class FinalProjectJavaOneApplicationTests {
 	@Test
 	void testShouldReturnProductByCategory() throws Exception {
 		int expected = 3;
-		int actual = service.findAllByCategory(Category.FRUIT).size();
+		int actual = service.findAllByCategory("Fruit").size();
 		Assert.assertEquals(expected, actual);
 	}
 

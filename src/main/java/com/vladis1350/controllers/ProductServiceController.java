@@ -69,7 +69,7 @@ public class ProductServiceController {
     }
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST)
-    public String filterProductByCategory(@ModelAttribute("category") Category category, Model model) {
+    public String filterProductByCategory(@ModelAttribute("category") String category, Model model) {
         List<Product> productList = service.findAllByCategory(category);
         System.out.println(category);
         model.addAttribute("products", productList);
