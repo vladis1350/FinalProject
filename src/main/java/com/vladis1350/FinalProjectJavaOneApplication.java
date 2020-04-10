@@ -7,7 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FinalProjectJavaOneApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FinalProjectJavaOneApplication.class, args);
+		if(args.length == 0) {
+			SpringApplication.run(FinalProjectJavaOneApplication.class, args);
+		} else
+			System.out.println("Unknown arguments");
 	}
 
 }

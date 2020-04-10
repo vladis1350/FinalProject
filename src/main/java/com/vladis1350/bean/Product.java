@@ -1,20 +1,20 @@
 package com.vladis1350.bean;
 
-import com.vladis1350.enumCategory.Category;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Objects;
 
 @Entity
-
-public class Product {
+@EqualsAndHashCode
+@ToString
+public class Product implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @SequenceGenerator(name="product_id", initialValue=7, allocationSize=100)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="product_id")
+    private long id;
     private String name;
     private BigDecimal price;
     private String category;
@@ -87,33 +87,5 @@ public class Product {
         this.description = description;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Objects.equals(id, product.id) &&
-                Objects.equals(name, product.name) &&
-                Objects.equals(price, product.price) &&
-                category == product.category &&
-                Objects.equals(discount, product.discount) &&
-                Objects.equals(description, product.description);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, price, category, discount, description);
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", category=" + category +
-                ", discount=" + discount +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }
