@@ -9,12 +9,10 @@ import com.vladis1350.services.CategoryService;
 import com.vladis1350.services.ProductService;
 import com.vladis1350.validate.ProductValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
@@ -29,7 +27,7 @@ public class ProductServiceController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping(value = Http.HOME, method = RequestMethod.GET)
+    @GetMapping(value = Http.HOME)
     public String viewHomePage(Model model) {
         Iterable<Product> products = productService.findAll();
         model.addAttribute(EntityConstant.PRODUCTS, products);
@@ -37,7 +35,7 @@ public class ProductServiceController {
         return Pages.HOME;
     }
 
-    @RequestMapping(value = Http.NEW_CATEGORY, method = RequestMethod.GET)
+    @GetMapping(value = Http.NEW_CATEGORY)
     public String showNewCategoryForm(Model model) {
         Category category = new Category();
         model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAll());
@@ -45,7 +43,7 @@ public class ProductServiceController {
         return Pages.CATEGORY;
     }
 
-    @RequestMapping(value = Http.NEW_PRODUCT, method = RequestMethod.GET)
+    @GetMapping(value = Http.NEW_PRODUCT)
     public String showNewProductsForm(Model model) {
         Product product = new Product();
         model.addAttribute(EntityConstant.UNIT_PRODUCT, product);
@@ -53,7 +51,7 @@ public class ProductServiceController {
         return Pages.NEW_PRODUCT;
     }
 
-    @RequestMapping(value = Http.EDIT_PRODUCT+"/{id}", method = RequestMethod.GET)
+    @GetMapping(value = Http.EDIT_PRODUCT + "/{id}")
     public ModelAndView showEditProductsForm(@PathVariable(name = "id") Long id, Model model) {
         ModelAndView modelAndView = new ModelAndView(Pages.EDIT_PRODUCT);
         Product product = productService.getById(id);
@@ -63,38 +61,37 @@ public class ProductServiceController {
     }
 
 
-    @RequestMapping(value = Http.SAVE_CATEGORY, method = RequestMethod.POST)
+    @PostMapping(value = Http.SAVE_CATEGORY)
     public String showCategory(@ModelAttribute(EntityConstant.UNIT_CATEGORY) Category category, Model model) {
         categoryService.save(category);
 
         return showNewCategoryForm(model);
     }
 
-    @RequestMapping(value = Http.SAVE_PRODUCT, method = RequestMethod.POST)
-    public String showProduct(@ModelAttribute(EntityConstant.UNIT_PRODUCT) Product product, Model model) {
+    @PostMapping(value = Http.SAVE_PRODUCT)
+    public String showProduct(@ModelAttribute(EntityConstant.UNIT_PRODUCT) Product product) {
         if (ProductValidator.checkValidateDataProduct(product)) {
             productService.save(product);
         } else {
             return Pages.ERROR;
         }
-        return Pages.REDIRECT+Pages.HOME;
+        return Pages.REDIRECT + Pages.HOME;
     }
 
-    @RequestMapping(value = Http.CANCEL, method = RequestMethod.POST)
+    @PostMapping(value = Http.CANCEL)
     public String clearFilterAndSearch() {
-        return Pages.REDIRECT+Pages.HOME;
+        return Pages.REDIRECT + Pages.HOME;
     }
 
-    @RequestMapping(value = Http.SEARCH, method = RequestMethod.POST)
+    @PostMapping(value = Http.SEARCH)
     public String searchProductById(@ModelAttribute(EntityConstant.UNIT_PRODUCT) Product product, Model model) {
         Product product1 = productService.getById(product.getId());
-        System.out.println(product.getCategory());
         model.addAttribute(EntityConstant.PRODUCTS, product1);
         model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAll());
         return Pages.HOME;
     }
 
-    @RequestMapping(value = Http.FILTER, method = RequestMethod.POST)
+    @PostMapping(value = Http.FILTER)
     public String filterProductByCategory(@ModelAttribute(EntityConstant.UNIT_CATEGORY) String category, Model model) {
         List<Product> productList = productService.findAllByCategory(category);
         model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAll());
@@ -102,25 +99,25 @@ public class ProductServiceController {
         return Pages.HOME;
     }
 
-    @RequestMapping(value = Http.DELETE_PRODUCT+"/{id}", method = RequestMethod.GET)
+    @GetMapping(value = Http.DELETE_PRODUCT + "/{id}")
     public String deleteProducts(@PathVariable(name = "id") Long id) {
         productService.deleteById(id);
-        return Pages.REDIRECT+Pages.HOME;
+        return Pages.REDIRECT + Pages.HOME;
     }
 
-    @RequestMapping("/set")
+    @GetMapping(value = Http.DISCOUNT)
     public String showSetDiscountForm(Model model) {
         Product product = new Product();
         model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAll());
-        model.addAttribute(EntityConstant.PRODUCTS, product);
+        model.addAttribute(EntityConstant.UNIT_PRODUCT, product);
 
         return Pages.SET_DISCOUNT;
     }
 
-    @RequestMapping(value = "/setDiscount", method = RequestMethod.POST)
-    public String setDiscountForCategory(@ModelAttribute(EntityConstant.UNIT_PRODUCT) Product product, BigDecimal discount, Model model) {
+    @PostMapping(value = Http.SET_DISCOUNT)
+    public String setDiscountForCategory(@ModelAttribute(EntityConstant.UNIT_PRODUCT) Product product, BigDecimal discount) {
         productService.setDiscountForCategory(product.getCategory(), discount);
-        return Pages.REDIRECT;
+        return Pages.REDIRECT + Pages.HOME;
     }
 
 }

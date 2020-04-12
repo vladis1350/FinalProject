@@ -9,6 +9,9 @@ public class Http {
     public static final String NEW_CATEGORY = "newCategory";
     public static final String SAVE_CATEGORY = "saveCategory";
 
+    public static final String DISCOUNT = "discount";
+    public static final String SET_DISCOUNT = "setDiscount";
+
 
     public static final String CANCEL = "cancel";
     public static final String FILTER = "filter";
