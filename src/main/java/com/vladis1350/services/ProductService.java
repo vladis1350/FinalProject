@@ -1,11 +1,10 @@
 package com.vladis1350.services;
 
-import com.vladis1350.bean.Category;
 import com.vladis1350.bean.Product;
 import com.vladis1350.repositories.ProductRepository;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,7 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
-    Logger log = LogManager.getLogger(Product.class);
+    Logger log = LogManager.getLogger(ProductService.class);
 
     public Iterable<Product> findAll() {
         return repository.findAll();
@@ -35,9 +34,10 @@ public class ProductService {
     }
 
     public Product getById(Long id) {
-        log.info("Accepted " + id);
         Optional<Product> value = repository.findById(id);
-        log.info("Get optional value: " + value);
+        if (!value.isPresent()) {
+            log.warn("id product not found!");
+        }
         return value.orElseGet(() -> value.orElse(new Product()));
     }
 
