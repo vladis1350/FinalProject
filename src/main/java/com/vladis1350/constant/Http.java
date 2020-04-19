@@ -1,6 +1,9 @@
 package com.vladis1350.constant;
 
 public class Http {
+
+    private Http(){}
+
     public static final String HOME = "home";
     public static final String NEW_PRODUCT = "newProduct";
     public static final String EDIT_PRODUCT = "editProduct";

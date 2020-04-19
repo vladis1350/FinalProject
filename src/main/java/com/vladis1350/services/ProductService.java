@@ -1,13 +1,18 @@
 package com.vladis1350.services;
 
+import com.vladis1350.bean.Category;
 import com.vladis1350.bean.Product;
 import com.vladis1350.repositories.ProductRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -15,16 +20,25 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
+    Logger log = LogManager.getLogger(Product.class);
+
     public Iterable<Product> findAll() {
         return repository.findAll();
     }
 
-    public void save(Product product) {
+    public boolean addNewProduct(Product product) {
+        if (product.getName() == null) {
+            return false;
+        }
         repository.save(product);
+        return true;
     }
 
     public Product getById(Long id) {
-        return repository.findById(id).get();
+        log.info("Accepted " + id);
+        Optional<Product> value = repository.findById(id);
+        log.info("Get optional value: " + value);
+        return value.orElseGet(() -> value.orElse(new Product()));
     }
 
     public void deleteById(Long id) {

@@ -10,7 +10,7 @@ public class ProductValidator {
     private ProductValidator(){}
 
     public static boolean validateName(String name) {
-        return (name.length() >= DataCondition.MIN_LENGTH_NAME ||
+        return (name != null && name.length() >= DataCondition.MIN_LENGTH_NAME &&
                 name.length() <= DataCondition.MAX_LENGTH_NAME);
     }
 
@@ -19,7 +19,7 @@ public class ProductValidator {
     }
 
     public static boolean validateDiscount(BigDecimal discount) {
-        return (discount.compareTo(DataCondition.MIN_DISCOUNT) >= 0 ||
+        return (discount.compareTo(DataCondition.MIN_DISCOUNT) >= 0 &&
                 discount.compareTo(DataCondition.MAX_DISCOUNT) <= 0);
     }
 

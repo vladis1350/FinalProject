@@ -1,10 +1,16 @@
 package com.vladis1350.bean;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Category {
+@EqualsAndHashCode
+@ToString
+public class Category implements Serializable {
     @Id
     @SequenceGenerator(name="category_id", initialValue=11, allocationSize=100)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="category_id")
@@ -18,26 +24,9 @@ public class Category {
         this.nameCategory = productCategory;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return Objects.equals(id, category.id) &&
-                Objects.equals(nameCategory, category.nameCategory);
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", productCategory='" + nameCategory + '\'' +
-                '}';
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nameCategory);
+    public Category(Long id, String productCategory) {
+        this.id = id;
+        this.nameCategory = productCategory;
     }
 
     public Long getId() {

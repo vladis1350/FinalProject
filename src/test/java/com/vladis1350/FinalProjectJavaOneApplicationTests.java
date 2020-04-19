@@ -21,9 +21,11 @@ class FinalProjectJavaOneApplicationTests {
 		boolean actualTrue = ProductValidator.validateName("ugii");
 		boolean actualFalse = ProductValidator.validateName("ug");
 		boolean actualFalseTwo = ProductValidator.validateName("");
+		boolean actualFalseThree = ProductValidator.validateName("sdfsdfsdvfadgsdbgafdhfdhdfhdfhfdhfdhfdhfdhfdhfdhdfhfdhfdhfdhfdh");
 
 		Assert.assertEquals(true, actualTrue);
 		Assert.assertEquals(false, actualFalse);
+		Assert.assertEquals(false, actualFalseTwo);
 		Assert.assertEquals(false, actualFalseTwo);
 
 	}
@@ -44,11 +46,13 @@ class FinalProjectJavaOneApplicationTests {
 		boolean actualTrueOne = ProductValidator.validateDiscount(new BigDecimal(0));
 		boolean actualFalseTwo = ProductValidator.validateDiscount(new BigDecimal(-26));
 		boolean actualTrueThree = ProductValidator.validateDiscount(new BigDecimal(13.2));
+		boolean actualFalseFour = ProductValidator.validateDiscount(new BigDecimal(101));
 
 		Assert.assertEquals(true, actualTrueOne);
 		Assert.assertEquals(false, actualFalseTwo);
 		Assert.assertNotEquals(false, actualTrueThree);
-	}
+        Assert.assertEquals(false, actualFalseFour);
+    }
 
 	@Test
 	void testShouldReturnProductById() throws Exception {

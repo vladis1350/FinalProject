@@ -9,7 +9,6 @@ import com.vladis1350.services.CategoryService;
 import com.vladis1350.services.ProductService;
 import com.vladis1350.validate.ProductValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -63,7 +62,7 @@ public class ProductServiceController {
 
     @PostMapping(value = Http.SAVE_CATEGORY)
     public String showCategory(@ModelAttribute(EntityConstant.UNIT_CATEGORY) Category category, Model model) {
-        categoryService.save(category);
+        categoryService.addNewCategory(category);
 
         return showNewCategoryForm(model);
     }
@@ -71,7 +70,7 @@ public class ProductServiceController {
     @PostMapping(value = Http.SAVE_PRODUCT)
     public String showProduct(@ModelAttribute(EntityConstant.UNIT_PRODUCT) Product product) {
         if (ProductValidator.checkValidateDataProduct(product)) {
-            productService.save(product);
+            productService.addNewProduct(product);
         } else {
             return Pages.ERROR;
         }

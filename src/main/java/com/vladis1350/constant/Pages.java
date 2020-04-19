@@ -1,6 +1,10 @@
 package com.vladis1350.constant;
 
 public class Pages {
+
+    private Pages() {
+    }
+
     public static final String HOME = "home";
     public static final String NEW_PRODUCT = "new_product";
     public static final String EDIT_PRODUCT = "edit_product";
