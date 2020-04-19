@@ -2,7 +2,6 @@ package com.vladis1350.services;
 
 import com.vladis1350.bean.Category;
 import com.vladis1350.repositories.CategoryRepository;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
