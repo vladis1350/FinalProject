@@ -1,6 +1,5 @@
 package com.vladis1350.bean;
 
-import com.vladis1350.dto.EntityDTO;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
