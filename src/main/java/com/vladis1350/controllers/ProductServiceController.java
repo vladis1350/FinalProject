@@ -1,18 +1,19 @@
 package com.vladis1350.controllers;
 
-import com.vladis1350.bean.Category;
 import com.vladis1350.bean.Product;
 import com.vladis1350.constant.EntityConstant;
-import com.vladis1350.constant.Pages;
 import com.vladis1350.constant.Http;
-import com.vladis1350.dto.EntityDTO;
+import com.vladis1350.constant.Pages;
 import com.vladis1350.services.CategoryService;
 import com.vladis1350.services.ProductService;
 import com.vladis1350.validate.ProductValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;

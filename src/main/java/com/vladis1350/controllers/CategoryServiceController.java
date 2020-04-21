@@ -4,7 +4,6 @@ import com.vladis1350.bean.Category;
 import com.vladis1350.constant.EntityConstant;
 import com.vladis1350.constant.Http;
 import com.vladis1350.constant.Pages;
-import com.vladis1350.dto.EntityDTO;
 import com.vladis1350.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
