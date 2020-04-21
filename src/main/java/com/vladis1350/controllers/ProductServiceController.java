@@ -5,6 +5,7 @@ import com.vladis1350.bean.Product;
 import com.vladis1350.constant.EntityConstant;
 import com.vladis1350.constant.Pages;
 import com.vladis1350.constant.Http;
+import com.vladis1350.dto.EntityDTO;
 import com.vladis1350.services.CategoryService;
 import com.vladis1350.services.ProductService;
 import com.vladis1350.validate.ProductValidator;
@@ -34,14 +35,6 @@ public class ProductServiceController {
         return Pages.HOME;
     }
 
-    @GetMapping(value = Http.NEW_CATEGORY)
-    public String showNewCategoryForm(Model model) {
-        Category category = new Category();
-        model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAll());
-        model.addAttribute(EntityConstant.UNIT_CATEGORY, category);
-        return Pages.CATEGORY;
-    }
-
     @GetMapping(value = Http.NEW_PRODUCT)
     public String showNewProductsForm(Model model) {
         Product product = new Product();
@@ -57,14 +50,6 @@ public class ProductServiceController {
         model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAll());
         modelAndView.addObject(EntityConstant.UNIT_PRODUCT, product);
         return modelAndView;
-    }
-
-
-    @PostMapping(value = Http.SAVE_CATEGORY)
-    public String showCategory(@ModelAttribute(EntityConstant.UNIT_CATEGORY) Category category, Model model) {
-        categoryService.addNewCategory(category);
-
-        return showNewCategoryForm(model);
     }
 
     @PostMapping(value = Http.SAVE_PRODUCT)
