@@ -92,4 +92,10 @@ class ProductServiceTest {
         }
         Assert.assertEquals(6, actualResult);
     }
+
+    @Test
+    void setDiscountForCategory() {
+        productService.setDiscountForCategory("Fruit", BigDecimal.valueOf(33));
+
+    }
 }

@@ -5,6 +5,7 @@ import com.vladis1350.constant.EntityConstant;
 import com.vladis1350.constant.Http;
 import com.vladis1350.constant.Pages;
 import com.vladis1350.services.CategoryService;
+import com.vladis1350.services.ProductComparatorService;
 import com.vladis1350.services.ProductService;
 import com.vladis1350.validate.ProductValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
