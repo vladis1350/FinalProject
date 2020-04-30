@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -28,13 +30,11 @@ public class ProductSortController {
 
     @PostMapping(value = Http.SORTING_NAME)
     public String sortingProductsByName(@ModelAttribute("sortByName") String variable, Model model) {
-        Iterable<Product> products = productService.findAll();
-        List<Product> productList = new ArrayList<>();
-        products.forEach(productList::add);
+        List<Product> productList = (List<Product>)productService.findAll();
         if (variable.equals(SortingOptions.ORDER_NAME)) {
-            productList.sort(ProductComparatorService.compareOrderName);
+            productList.sort(Comparator.comparing(Product::getName));
         } else if (variable.equals(SortingOptions.REVERSE_ORDER_NAME)) {
-            productList.sort(ProductComparatorService.compareReverseOrderName);
+            productList.sort((o1, o2) -> o1.getName().compareTo(o2.getName()) * -1);
         }
         model.addAttribute(EntityConstant.PRODUCTS, productList);
         model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAll());
@@ -43,13 +43,11 @@ public class ProductSortController {
 
     @PostMapping(value = Http.SORTING_PRICE)
     public String sortingProductsByPrice(@ModelAttribute("sortByPrice") String variable, Model model) {
-        Iterable<Product> products = productService.findAll();
-        List<Product> productList = new ArrayList<>();
-        products.forEach(productList::add);
+        List<Product> productList = (List<Product>)productService.findAll();
         if (variable.equals(SortingOptions.ORDER_PRICE)) {
-            productList.sort(ProductComparatorService.compareOrderPrice);
+            productList.sort(Comparator.comparing(Product::getPrice));
         } else if (variable.equals(SortingOptions.REVERSE_ORDER_PRICE)){
-            productList.sort(ProductComparatorService.compareReverseOrderPrice);
+            productList.sort(Comparator.comparing(Product::getPrice));
         }
         model.addAttribute(EntityConstant.PRODUCTS, productList);
         model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAll());
@@ -58,9 +56,7 @@ public class ProductSortController {
 
     @PostMapping(value = Http.SORTING_CATEGORY)
     public String sortingProductsByCategory(@ModelAttribute("sortByCategory") String variable, Model model) {
-        Iterable<Product> products = productService.findAll();
-        List<Product> productList = new ArrayList<>();
-        products.forEach(productList::add);
+        List<Product> productList = (List<Product>)productService.findAll();
         if (variable.equals(SortingOptions.ORDER_CATEGORY)) {
             productList.sort(ProductComparatorService.compareOrderCategory);
         } else if (variable.equals(SortingOptions.REVERSE_ORDER_CATEGORY)){
@@ -73,9 +69,7 @@ public class ProductSortController {
 
     @PostMapping(value = Http.SORTING_DISCOUNT)
     public String sortingProductsByDiscount(@ModelAttribute("sortByDiscount") String variable, Model model) {
-        Iterable<Product> products = productService.findAll();
-        List<Product> productList = new ArrayList<>();
-        products.forEach(productList::add);
+        List<Product> productList = (List<Product>) productService.findAll();
         if (variable.equals(SortingOptions.ORDER_DISCOUNT)) {
             productList.sort(ProductComparatorService.compareOrderDiscount);
         } else if (variable.equals(SortingOptions.REVERSE_ORDER_DISCOUNT)){
