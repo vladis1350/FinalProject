@@ -34,7 +34,7 @@ public class ProductSortController {
         if (variable.equals(SortingOptions.ORDER_NAME)) {
             productList.sort(Comparator.comparing(Product::getName));
         } else if (variable.equals(SortingOptions.REVERSE_ORDER_NAME)) {
-            productList.sort((o1, o2) -> o1.getName().compareTo(o2.getName()) * -1);
+            productList.sort(Comparator.comparing(Product::getName, Collections.reverseOrder()));
         }
         model.addAttribute(EntityConstant.PRODUCTS, productList);
         model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAll());
@@ -47,7 +47,7 @@ public class ProductSortController {
         if (variable.equals(SortingOptions.ORDER_PRICE)) {
             productList.sort(Comparator.comparing(Product::getPrice));
         } else if (variable.equals(SortingOptions.REVERSE_ORDER_PRICE)){
-            productList.sort(Comparator.comparing(Product::getPrice));
+            productList.sort(Comparator.comparing(Product::getPrice, Collections.reverseOrder()));
         }
         model.addAttribute(EntityConstant.PRODUCTS, productList);
         model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAll());
@@ -58,9 +58,9 @@ public class ProductSortController {
     public String sortingProductsByCategory(@ModelAttribute("sortByCategory") String variable, Model model) {
         List<Product> productList = (List<Product>)productService.findAll();
         if (variable.equals(SortingOptions.ORDER_CATEGORY)) {
-            productList.sort(ProductComparatorService.compareOrderCategory);
+            productList.sort(Comparator.comparing(Product::getCategory));
         } else if (variable.equals(SortingOptions.REVERSE_ORDER_CATEGORY)){
-            productList.sort(ProductComparatorService.compareReverseOrderCategory);
+            productList.sort(Comparator.comparing(Product::getCategory, Collections.reverseOrder()));
         }
         model.addAttribute(EntityConstant.PRODUCTS, productList);
         model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAll());
@@ -71,9 +71,9 @@ public class ProductSortController {
     public String sortingProductsByDiscount(@ModelAttribute("sortByDiscount") String variable, Model model) {
         List<Product> productList = (List<Product>) productService.findAll();
         if (variable.equals(SortingOptions.ORDER_DISCOUNT)) {
-            productList.sort(ProductComparatorService.compareOrderDiscount);
+            productList.sort(Comparator.comparing(Product::getDiscount));
         } else if (variable.equals(SortingOptions.REVERSE_ORDER_DISCOUNT)){
-            productList.sort(ProductComparatorService.compareReverseOrderDiscount);
+            productList.sort(Comparator.comparing(Product::getDiscount, Collections.reverseOrder()));
         }
         model.addAttribute(EntityConstant.PRODUCTS, productList);
         model.addAttribute(EntityConstant.CATEGORIES, categoryService.findAll());

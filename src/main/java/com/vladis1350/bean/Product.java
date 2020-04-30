@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Entity
+
 @EqualsAndHashCode
 @ToString
 public class Product implements Serializable {
