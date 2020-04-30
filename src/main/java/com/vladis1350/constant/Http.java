@@ -19,5 +19,11 @@ public class Http {
     public static final String CANCEL = "cancel";
     public static final String FILTER = "filter";
     public static final String SEARCH = "search";
-    public static final String SORTING = "sorting";
+
+    public static final String SORTING_PRICE = "sortingPrice";
+    public static final String SORTING_NAME = "sortingName";
+
+    public static final String SORTING_CATEGORY = "sortingCategory";
+    public static final String SORTING_DISCOUNT = "sortingDiscount";
+
 }
